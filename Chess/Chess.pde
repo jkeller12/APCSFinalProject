@@ -139,9 +139,9 @@ boolean Possible_Move(int yi, int xi, int yf, int xf, boolean Turn, PImage[][] B
     // White Pawn Moves
     if(Board[yi][xi] == wP && !promotion){ 
       // Pawn foward 1
-      if(yf = yi -1 && xf = xi && Board[yf][xf] == null) return true; 
+      if(yf == yi -1 && xf == xi && Board[yf][xf] == null) return true; 
       // Pawn's first move, foward 2
-      else if(xi = xf && yf == yi-2 && yi == 6 && Board[yf][xf] == null && Board[yf+1][xf] == null) return true; 
+      else if(xi == xf && yf == yi-2 && yi == 6 && Board[yf][xf] == null && Board[yf+1][xf] == null) return true; 
       
       // Capture Right
       if(xi != 7){
@@ -155,14 +155,16 @@ boolean Possible_Move(int yi, int xi, int yf, int xf, boolean Turn, PImage[][] B
     
     // White King Moves
     else if(Board[yi][xi] == wK) {
+      if(abs(xf-xi) <=1 && abs(yf-yi) <= 1) if(isBlack(yf,xf,Board) || Board[yf][xf] == null) return true; 
+    }
   }
   return false; 
 }
-boolean isBlack(int x, int y, PImage[][] Board){
-  PImage P = Board[x][y]; 
+boolean isBlack(int y, int x, PImage[][] Board){
+  PImage P = Board[y][x]; 
   return (P == bP ||P == bR || P == bKn || P == bB || P == bK || P == bQ);
 }
-boolean isWhite(int x, int y, PImage[][] Board){
-  PImage P = Board[x][y]; 
+boolean isWhite(int y, int x, PImage[][] Board){
+  PImage P = Board[y][x]; 
   return (P == wP ||P == wR || P == wKn || P == wB || P == wK || P == wQ);
 }
