@@ -181,11 +181,26 @@ PImage[][] move(int yi, int xi, int yf, int xf, boolean B, PImage[][] Board){
    Yf = yf; 
   }
   
+  // White Pawn promotion
   if(Board[yi][xi] == wP) if( yf == 0) if(B) promotion = true; 
+  
+  // Black Pawn promotion
   else if(Board[yi][xi] == bP) if( yf == 7) if(B) promotion = true; 
   
-  
+  // White King Move
+  else if(Board[yi][xi] == wK){
+    if(wKm == false && xf == 6){
+      Board[7][7] = null; 
+      Board[7][5] = wR; 
+    }
+    if(wKm == false && xf == 2){
+     Board[7][0] = null; 
+     Board[7][3] = wR; 
+    }
+    if(B) wKm = B; 
   }
+  
+  // Black King Move
   
   return Board; 
 }
