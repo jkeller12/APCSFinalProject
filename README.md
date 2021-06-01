@@ -20,3 +20,11 @@ The pieces class will have a constructor that takes in int color, int col, int r
 The subclass for each piece will have an instance variable that stores possible moves based on the piece’s position (w/o location of other pieces).`
 I’ll then have a methods file with the following methods:
 A piece mover method that’ll move pieces around
+
+
+
+Development Log:
+05/28/21: I finished up the prototype and built a sketch file that projects a basic chessboard.
+
+06/01/21: I finished the prototype (including UML drawings and updated the class structure). I began writing the board and pieces classes.
+I decided the board and piece class sturcutre might be a tad messy, so I'm attempting to do it without those elements. I've started by attempting to draw a board in blue and white and place the pieces on that board. I've also attempted to work on checks, movement, possible moves and other things. 
