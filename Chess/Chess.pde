@@ -155,11 +155,41 @@ boolean Possible_Move(int yi, int xi, int yf, int xf, boolean Turn, PImage[][] B
     
     // White King Moves
     else if(Board[yi][xi] == wK) {
+      // 1 Square Move
       if(abs(xf-xi) <=1 && abs(yf-yi) <= 1) if(isBlack(yf,xf,Board) || Board[yf][xf] == null) return true; 
+      // Castle 
+      if(!wKm && !check){
+        if(Board[7][5] == null && board[7][6] == null && yf == 7 && xf ==6 && !wRm1) if(!incheck(yi, xi, 7, 5, turn)) return true;
+        if(Board[7][3] == null && board[7][2] == null && board[7][1] == null && yf == 7 && xf == 2 && !wRm0) if(!incheck(yi, xi, 7, 3, turn)) return true;
+      }
     }
   }
   return false; 
 }
+boolean incheck(int yi, int xi, int yf, int xf, boolean Turn){
+  PImage[][] Board1 = new PImage[8][8];
+  for(int i = 0; i <= 7; i++) for(int j = 0; j <= 8; j++) Board1[i][j] = board[i][j];
+  Board1 = move(yi, xi,yf,xf, BLACK, Board1);
+  return false; 
+}
+
+PImage[][] move(int yi, int xi, int yf, int xf, boolean B, PImage[][] Board){
+  if(B){
+   Xi = xi; 
+   Xf = xf; 
+   Yi = yi; 
+   Yf = yf; 
+  }
+  
+  if(Board[yi][xi] == wP) if( yf == 0) if(B) promotion = true; 
+  else if(Board[yi][xi] == bP) if( yf == 7) if(B) promotion = true; 
+  
+  
+  }
+  
+  return Board; 
+}
+
 boolean isBlack(int y, int x, PImage[][] Board){
   PImage P = Board[y][x]; 
   return (P == bP ||P == bR || P == bKn || P == bB || P == bK || P == bQ);
