@@ -28,6 +28,6 @@ public abstract class Piece{
   public void setMoved(boolean moved){
     this.moved = moved;
   }
-  public abstract void setImage(PImage Img); 
+  public abstract PImage getImage(); 
   public abstract boolean movable(Board board, Cell start, Cell end);
 }

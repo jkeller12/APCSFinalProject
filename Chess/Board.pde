@@ -9,7 +9,7 @@ public class Board{
 
   public Cell getCell(int c, int r)
   {
-    if(x < 0 || x > 7 || y < 0 || y > 7) throw new IndexOutOfBoundsException("Index out of Bound");
+    if(c < 0 || c > 7 || r < 0 || r > 7) throw new IndexOutOfBoundsException("Index out of Bound");
     return board[r][c];
   }
   public PImage[][] getGraphicBoard(){
@@ -18,7 +18,7 @@ public class Board{
 
   public void init(){
     // Pawns
-    for(int r = 0; i <= 7; r++){
+    for(int r = 0; r <= 7; r++){
       // board[r][c] = new Cell (c, r, piece_type)
       board[r][1] = new Cell(1, r, new Pawn(BLACK));
       board[r][6] = new Cell(6, r, new Pawn(WHITE));

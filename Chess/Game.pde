@@ -1,16 +1,14 @@
 public class Game{
   private boolean WHITE = false;
-  private boolean BLACk = true;
+  private boolean BLACK = true;
   private Player[] players;
   private Board board;
   private Player currentTurn;
   private GameState state;
   private ArrayList<Move> movesPlayed;
 
-  public Board getBoard(){
-    return board; 
-  }
-  private void init(Player p1, Player p2){
+  
+  public void init(Player p1, Player p2){
     players[0] = p1;
     players[1] = p2;
 
@@ -20,6 +18,10 @@ public class Game{
     else this.currentTurn = p2;
 
     movesPlayed.clear();
+  }
+  
+  public Board getBoard(){
+    return this.board; 
   }
   public GameState getState(){
     return this.state;
