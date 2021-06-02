@@ -1,7 +1,4 @@
 public class Queen extends Piece{
-  private boolean WHITE = false; 
-  private boolean BLACK = true;
-  
   public Queen(boolean BoW){
     super(BoW);
   }
@@ -11,5 +8,4 @@ public class Queen extends Piece{
     Rook R0 = new Rook(this.BoW()); 
     return B0.movable(board, start, end) || R0.movable(board, start, end);
   }
-  
 }
