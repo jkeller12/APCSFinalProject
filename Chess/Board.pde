@@ -13,9 +13,9 @@ public class Board{
     return board[r][c];
   }
   
-  public PImage getGraphicBoardImage(int c, int r){
-    if(c < 0 || c > 7 || r < 0 || r > 7) throw new IndexOutOfBoundsException("Index out of Bound");
-    return graphicBoard[r][c];
+  public PImage[][] getGraphicBoardImage(){
+    //if(c < 0 || c > 7 || r < 0 || r > 7) throw new IndexOutOfBoundsException("Index out of Bound");
+    return this.graphicBoard;
   }
 
   public void init(){

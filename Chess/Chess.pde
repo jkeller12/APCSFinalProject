@@ -19,14 +19,7 @@ void setup(){
   start();
 }
 void start(){
-  board = new PImage[8][8];
-  for(int i = 0; i < 8;  i++){
-    for(int j = 0; j < 8; j++){
-      if(Chessboard.getCell(j, i).getPiece() != null){
-        board[i][j] = Chessboard.getCell(j, i).getPiece().getImage();
-      }
-    }  
-  }
+  System.out.println(Chessboard.getCell(0,0));
 }
 void drawBoard(){
   for(int i = 0; i <= 7; i++) for(int j = 0; j <= 7; j++){
@@ -36,10 +29,9 @@ void drawBoard(){
 
     // Creates chess board;
     rect(i * width/8, j*height/8, width/8, height/8);
-    if(board[i][j] != null) image (board[i][j], i*width/8, j*height/8);
+    //image (board[0][0], i*width/8, j*height/8);
   }
 }
 void draw(){
   drawBoard();
-  
 }
