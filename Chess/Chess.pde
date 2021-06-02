@@ -1,5 +1,3 @@
-
-PImage wP, bP, wR, bR, wKn, bKn, wB, bB, wK, bK, wQ, bQ;
 PImage[][] board;
 
 
@@ -44,7 +42,7 @@ void draw(){
   }
 }
 void start(){
- board = new PImage[8][8];
+ Game.init();
 
  // Pawns
  for(int i = 0; i < 8; i++){

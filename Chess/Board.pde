@@ -2,7 +2,7 @@ public class Board{
   boolean WHITE = false;
   boolean BLACK = true;
   private Cell[][] board;
-  PImage[][] graphicBoard; 
+  PImage[][] graphicBoard;
   public Board(){
    this.init();
   }
@@ -42,6 +42,10 @@ public class Board{
 
     // Null Squares
     for(int r = 2; r <= 5; r++) for(int c = 0; c <= 7; c++) board[r][c] = new Cell(r, c, null);
-
+    for(int r = 0; r < 8; r++){
+      for(int c = 0; c < 8; c++){
+        graphicBoard[r][c] = board[r][c].getPiece().getImage();
+      }
+    }
   }
 }
