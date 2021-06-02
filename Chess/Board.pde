@@ -2,7 +2,7 @@ public class Board{
   boolean WHITE = false;
   boolean BLACK = true;
   private Cell[][] board;
-  PImage[][] graphicBoard;
+  private PImage[][] graphicBoard;
   public Board(){
    this.init();
   }
@@ -11,6 +11,9 @@ public class Board{
   {
     if(x < 0 || x > 7 || y < 0 || y > 7) throw new IndexOutOfBoundsException("Index out of Bound");
     return board[r][c];
+  }
+  public PImage[][] getGraphicBoard(){
+    return this.graphicBoard;
   }
 
   public void init(){

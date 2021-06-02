@@ -7,6 +7,9 @@ public class Game{
   private GameState state;
   private ArrayList<Move> movesPlayed;
 
+  public Board getBoard(){
+    return board; 
+  }
   private void init(Player p1, Player p2){
     players[0] = p1;
     players[1] = p2;

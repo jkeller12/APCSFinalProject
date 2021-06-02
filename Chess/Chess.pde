@@ -1,6 +1,3 @@
-PImage[][] board;
-
-
 // Boolean for selected piece
 boolean click;
 void setup(){
@@ -23,9 +20,9 @@ void drawBoard(){
 
     // Places pieces
 
-    if(board[j][i] != null) image(board[j][i], i*width/8, j*height/8);
+    if(board[j][i] != null) image(Game.getBoard().getGraphicBoard()[j][i], i*width/8, j*height/8);
 
-    //if(click) if
+    // Highlighting?
 
   }
 
@@ -44,50 +41,6 @@ void draw(){
 void start(){
  Game.init();
 
- // Pawns
- for(int i = 0; i < 8; i++){
-   board[1][i] = bP;
-   board[6][i] = wP;
- }
- // Rooks
- board[0][0] = bR;
- board[0][7] = bR;
- board[7][0] = wR;
- board[7][7] = wR;
-
- // Knights
- board[0][1] = bKn;
- board[0][6] = bKn;
- board[7][1] = wKn;
- board[7][6] = wKn;
-
- // Bishops
-
- board[0][2] = bB;
- board[0][5] = bB;
- board[7][2] = wB;
- board[7][5] = wB;
-
- // King & Queen
-
- board[0][3] = bQ;
- board[0][4] = bK;
- board[7][3] = wQ;
- board[7][4] = wK;
-
- // Set Global vraibles
-
- game_finished = false;
- check = false;
- click = false;
- turn = WHITE;
- promotion = false;
- wKm = false;
- bKm = false;
- wRm0 = false; // Col 0 Rook
- wRm1 = false; // Col 7 Rook
- bRm0 = false; // Col 0 Rook
- bRm1 = false; // Col 7 Rook
 }
 
 boolean Possible_Move(int yi, int xi, int yf, int xf, boolean Turn, PImage[][] Board){
