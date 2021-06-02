@@ -1,4 +1,6 @@
 public class King extends Piece{
+  private boolean WHITE = false; 
+  private boolean BLACK = true;
   private boolean CastleCompleted = false; 
   
   public King(boolean BoW){

@@ -3,6 +3,7 @@ public class Cell{
  private int x;
  private int y; 
  public Cell(int c, int r, Piece piece){
+   if(c < 0 || c > 7 || r < 0 || r > 7) throw new IndexOutOfBoundsException("Index out of Bound");
    this.setPiece(piece);
    this.setX(c);
    this.setY(r);

@@ -31,8 +31,15 @@ I decided the board and piece class sturcutre might be a tad messy, so I'm attem
 
 Ok Update later on in the same day: the object oriented appraoch was most definetly clearer and better. I'm deleting my current structure and restarting.
 
-What needs implementing in King Class:
--inCheck Method: tells whether or not the king is in check on a square
+Future Necessary Implements:
+
+-inCheck Method
+-->Tells whether or not the king is in check on a square
+--> MUST ADD TO END OF EACH MOVABLE method: a piece can't move so that their king becomes checked
 --> Might need other classes written first (the extension of what squares each piece threatens is crucial)
 
--For Castling, I need to make sure neither the king or rook as moved. (the rook hasmoved method doens't transfer)
+-For Castle, check for king or rook prior moves. (the rook hasmoved method doens't transfer)
+
+- threatens
+--> Idea: when board is initialzied an array of threatened squares is created. Upon each move, that array is updated
+--> Problem: computing time needed, is there a better approach? 

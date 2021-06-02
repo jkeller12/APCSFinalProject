@@ -1,14 +1,9 @@
 public class Rook extends Piece{
-  private boolean Moved = false; 
+  private boolean WHITE = false; 
+  private boolean BLACK = true;
   
   public Rook(boolean BoW){
     super(BoW);
-  }
-  public boolean hasMoved (){
-    return this.Moved ;
-  }
-  public void setCMoved(boolean Moved ){
-    this.Moved  = Moved ; 
   }
   
   public boolean movable(Board board, Cell start, Cell end){
@@ -40,7 +35,7 @@ public class Rook extends Piece{
     else{
       for(int r  = 0; r < 8; r++){
         for(int c = 0; c < 8; c++){
-          int a;
+          int a = -1;
           if(this.BoW() == WHITE) a = 7; 
           if(this.BoW() == BLACK) a = 0; 
           if(board.getCell(c, r) == new Cell(a, 4, new King(this.BoW()))){
