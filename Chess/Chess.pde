@@ -34,9 +34,12 @@ void drawBoard(){
 }
 void draw(){
   drawBoard();
-  if(game_finished){
+  if(Game.getState() != ACTIVE ){
     fill(0, 255, 0);
-    if(check) text("Game Over: Checkmate", 0, height/2, width, height);
+    if(Game.getState() == WHITE_WIN) text("Game Over: White Wins", 0, height/2, width, height);
+    else if(Game.getState() == BLACK_WIN) text("Game Over: Black Wins", 0, height/2, width, height);
+    else if(Game.getState() == FORFEIT) text("Game Over: Forfeit", 0, height/2, width, height);
+    else if(Game.getState() == RESIGNATION) text("Game Over: RESIGNATION", 0, height/2, width, height);
     else text("Game Over: Stalemate", 0, height/2, width, height);
   }
 }
