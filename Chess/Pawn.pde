@@ -2,6 +2,7 @@ public class Pawn extends Piece{
   private boolean WHITE = false; 
   private boolean BLACK = true;
   private PImage Image; 
+  
   public Pawn(boolean BoW){
     super(BoW);
     PImage P;

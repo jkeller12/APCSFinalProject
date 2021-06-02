@@ -12,17 +12,24 @@ public class Board{
     if(c < 0 || c > 7 || r < 0 || r > 7) throw new IndexOutOfBoundsException("Index out of Bound");
     return board[r][c];
   }
-  public PImage[][] getGraphicBoard(){
-    return this.graphicBoard;
+  
+  public PImage getGraphicBoardImage(int c, int r){
+    if(c < 0 || c > 7 || r < 0 || r > 7) throw new IndexOutOfBoundsException("Index out of Bound");
+    return graphicBoard[r][c];
   }
 
   public void init(){
     // Pawns
-    for(int r = 0; r <= 7; r++){
+    board = new Cell[8][8];
+    graphicBoard = new PImage[8][8];
+    
+    // Pawns
+    for(int c = 0; c <= 7; c++){
       // board[r][c] = new Cell (c, r, piece_type)
-      board[r][1] = new Cell(1, r, new Pawn(BLACK));
-      board[r][6] = new Cell(6, r, new Pawn(WHITE));
+      board[1][c] = new Cell(c, 1, new Pawn(BLACK));
+      board[6][c] = new Cell(c, 6, new Pawn(WHITE));
     }
+    
     // Other Black Pieces
     board[0][0] = new Cell(0, 0, new Rook(BLACK));
     board[0][1] = new Cell(1, 0, new Knight(BLACK));
@@ -44,10 +51,14 @@ public class Board{
     board[7][7] = new Cell(7, 7, new Rook(WHITE));
 
     // Null Squares
-    for(int r = 2; r <= 5; r++) for(int c = 0; c <= 7; c++) board[r][c] = new Cell(r, c, null);
+    for(int r = 2; r <= 5; r++) for(int c = 0; c <= 7; c++) board[r][c] = new Cell(c, r, null);
+    
+    // Load Graphics
     for(int r = 0; r < 8; r++){
       for(int c = 0; c < 8; c++){
-        graphicBoard[r][c] = board[r][c].getPiece().getImage();
+        if(board[r][c].getPiece() != null){
+          graphicBoard[r][c] = board[r][c].getPiece().getImage();
+        }
       }
     }
   }
