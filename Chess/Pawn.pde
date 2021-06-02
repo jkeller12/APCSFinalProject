@@ -1,9 +1,20 @@
 public class Pawn extends Piece{
   private boolean WHITE = false; 
   private boolean BLACK = true;
-  
+  private PImage Image; 
   public Pawn(boolean BoW){
     super(BoW);
+    PImage P;
+    if(BoW == WHITE) P = loadImage("WhitePawn.png");
+    else{
+      P = loadImage("BlackPawn.png");
+    }
+    P.resize(width/8,height/8);
+    this.Image = P;
+  }
+  
+  public PImage getImage(){
+    return Image;
   }
   public boolean movable(Board board, Cell start, Cell end){
     if(end.getPiece().BoW() == this.BoW()) return false; // If same color, then no

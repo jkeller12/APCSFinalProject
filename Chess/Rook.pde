@@ -1,9 +1,21 @@
 public class Rook extends Piece{
   private boolean WHITE = false; 
   private boolean BLACK = true;
+  private PImage Image; 
   
   public Rook(boolean BoW){
     super(BoW);
+    PImage R;
+    if(BoW == false) R = loadImage("WhiteRook.png");
+    else{
+      R = loadImage("BlackRook.png");
+    }
+    R.resize(width/8,height/8);
+    this.Image = R;
+  }
+  
+  public PImage getImage(){
+    return Image;
   }
   
   public boolean movable(Board board, Cell start, Cell end){

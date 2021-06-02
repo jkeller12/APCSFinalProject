@@ -1,36 +1,49 @@
 public class Bishop extends Piece{
+  private PImage Image;
   public Bishop(boolean BoW){
     super(BoW);
+    PImage B;
+    if(BoW == false) B = loadImage("WhiteBishop.png");
+    else{
+      B = loadImage("BlackBishop.png");
+    }
+    B.resize(width/8,height/8);
+    this.Image = B;
   }
-  
+
   public boolean movable(Board board, Cell start, Cell end){
-    if(end.getPiece().BoW() == this.BoW()) return false; 
-     int xi = start.getX(); 
+    if(end.getPiece().BoW() == this.BoW()) return false;
+     int xi = start.getX();
      int xf = end.getX();
-     int yi = start.getY(); 
-     int yf = start.getY(); 
-     
-     int dX = abs(xi-xf); 
-     
-     int dY = abs(yi-yf); 
-     if(dX == 0 || dY == 0) return false; 
+     int yi = start.getY();
+     int yf = start.getY();
+
+     int dX = abs(xi-xf);
+
+     int dY = abs(yi-yf);
+     if(dX == 0 || dY == 0) return false;
      if(dX/dY == 1){
        if(xi < xf){
          for(int c = xi+1; c < xf; c++){
-           if(yi < yf) for(int r = yi+1; r < yf; r++) if(board.getCell(c, r).getPiece() != null) return false; 
-           
+           if(yi < yf) for(int r = yi+1; r < yf; r++) if(board.getCell(c, r).getPiece() != null) return false;
+
            if(yf < yi) for(int r = yf; r < yi; r++) if(board.getCell(c, r).getPiece() != null) return false;
          }
        }
        if(xf < xi){
          for(int c = xf+1; c < xi; c++){
-           if(yi < yf) for(int r = yi+1; r < yf; r++) if(board.getCell(c, r).getPiece() != null) return false; 
-           
+           if(yi < yf) for(int r = yi+1; r < yf; r++) if(board.getCell(c, r).getPiece() != null) return false;
+
            if(yf < yi) for(int r = yf; r < yi; r++) if(board.getCell(c, r).getPiece() != null) return false;
          }
        }
-       else return true; 
+       else return true;
      }
      return false;
   }
+
+  public PImage getImage(){
+    return Image;
+  }
+
 }

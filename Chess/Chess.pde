@@ -1,20 +1,7 @@
 
 PImage wP, bP, wR, bR, wKn, bKn, wB, bB, wK, bK, wQ, bQ;
 PImage[][] board;
-// Booleans for Casteling
-boolean wKm, bKm, wRm0, wRm1, bRm0, bRm1;
 
-// Boolean for Game Condition
-boolean game_finished;
-boolean check;
-boolean promotion;
-
-// Boolean for Turn
-boolean turn; // False -> black, True -> white
-boolean WHITE = true;
-boolean BLACK = false;
-// Integers for Piece position
-int Xi,Yi, Xf, Yf; // (Xi, Yi) -> starting pos. (Xf, Yf) --> ending pos.
 
 // Boolean for selected piece
 boolean click;
@@ -23,37 +10,6 @@ void setup(){
   noStroke();
   textSize(width/8);
   textAlign(CENTER);
-
-
-  // Loading Images of Pieces
-  wP = loadImage("WhitePawn.png");
-  bP = loadImage("BlackPawn.png");
-  wR = loadImage("WhiteRook.png");
-  bR = loadImage("BlackRook.png");
-  wKn = loadImage("WhiteKnight.png");
-  bKn = loadImage("BlackKnight.png");
-  wB = loadImage("WhiteBishop.png");
-  bB = loadImage("BlackBishop.png");
-  wK = loadImage("WhiteKing.png");
-  bK = loadImage("BlackKing.png");
-  wQ = loadImage("WhiteQueen.png");
-  bQ = loadImage("BlackQueen.png");
-
-  // Reszing images of pieces to fit squares
-
-  wP.resize(width/8,height/8);
-  wR.resize(width/8,height/8);
-  wKn.resize(width/8,height/8);
-  wB.resize(width/8,height/8);
-  wK.resize(width/8,height/8);
-  wQ.resize(width/8,height/8);
-
-  bP.resize(width/8,height/8);
-  bR.resize(width/8,height/8);
-  bKn.resize(width/8,height/8);
-  bB.resize(width/8,height/8);
-  bK.resize(width/8,height/8);
-  bQ.resize(width/8,height/8);
 
   start();
 }

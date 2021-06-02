@@ -1,10 +1,22 @@
 public class King extends Piece{
   private boolean WHITE = false; 
   private boolean BLACK = true;
+    private PImage Image;
+
   private boolean CastleCompleted = false; 
   
   public King(boolean BoW){
     super(BoW);
+    PImage K;
+    if(BoW == WHITE) K = loadImage("WhiteKing.png");
+    else{
+      K = loadImage("BlackKing.png");
+    }
+    K.resize(width/8,height/8);
+    this.Image = K;
+  }
+  public PImage getImage(){
+    return Image;
   }
   public boolean isCastleCompleted (){
     return this.CastleCompleted ;
