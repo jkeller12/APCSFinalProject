@@ -2,10 +2,10 @@ public class Cell{
  private Piece piece; 
  private int x;
  private int y; 
- public Cell(int x, int y, Piece piece){
+ public Cell(int c, int r, Piece piece){
    this.setPiece(piece);
-   this.setX(x);
-   this.setY(y);
+   this.setX(c);
+   this.setY(r);
  }
  public Piece getPiece(){
    return this.piece;

@@ -7,7 +7,7 @@ public class King extends Piece{
   public boolean isCastleCompleted (){
     return this.CastleCompleted ;
   }
-  public void setCastlePossible(boolean CastleCompleted ){
+  public void setCastleCompleted(boolean CastleCompleted ){
     this.CastleCompleted  = CastleCompleted ; 
   }
   
@@ -22,6 +22,14 @@ public class King extends Piece{
     return this.isCastlePossible(board, start, end);
   }
   
+  private boolean inCheck(Board board, Cell pos){
+    if(this.BoW() == WHITE){
+      
+    }
+    return false; 
+  }
+  
+  
   private boolean isCastlePossible(Board board, Cell start, Cell end){
     if(this.isCastleCompleted()) return false; 
     
@@ -35,7 +43,7 @@ public class King extends Piece{
           if(board.getCell(1, 7).getPiece() == null && 
              board.getCell(2, 7).getPiece() == null && 
              board.getCell(3, 7).getPiece() == null){
-            return true;   
+               if(board.getCell(0,7).getPiece().hasMoved() == false) return true;   
           }
         }
       }
@@ -46,13 +54,13 @@ public class King extends Piece{
         if(board.getCell(7,7).getPiece() == C.getPiece()){
           if(board.getCell(6, 7).getPiece() == null && 
              board.getCell(5, 7).getPiece() == null){
-            return true;   
+               if(board.getCell(0,7).getPiece().hasMoved() == false) return true;   
           }
         }
       }
     }
     // Black Castle
-    if(this.BoW() == BLACK){
+    else if(this.BoW() == BLACK){
       // Left Black Castle
       if(start.getX() == 4 && start.getY() == 0 && end.getX() == 2 && end.getY() == 0){
         
@@ -77,6 +85,7 @@ public class King extends Piece{
         }
       }
     }
+    return false; 
   }
   
 }

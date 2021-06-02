@@ -2,6 +2,7 @@ public abstract class Piece{
   private boolean WHITE = false; 
   private boolean BLACK = true;
   private boolean alive = false;
+  private boolean moved = false; 
   private boolean BoW = false; 
   // White = False
   // Black = True
@@ -21,5 +22,13 @@ public abstract class Piece{
   public void setAlive(boolean alive){
     this.alive = alive;
   }
+  
+  public boolean hasMoved(){
+    return this.moved;
+  }
+  public void setMoved(boolean moved){
+    this.moved = moved; 
+  }
+  
   public abstract boolean movable(Board board, Cell intital, Cell end);
 }
