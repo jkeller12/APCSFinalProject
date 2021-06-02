@@ -24,6 +24,8 @@ public class King extends Piece{
   
   private boolean isCastlePossible(Board board, Cell start, Cell end){
     if(this.isCastleCompleted()) return false; 
+    
+    // White Castle 
     if(this.BoW() == WHITE){
       // Left White Castle
       if(start.getX() == 4 && start.getY() == 7 && end.getX() == 2 && end.getY() == 7){
@@ -49,8 +51,31 @@ public class King extends Piece{
         }
       }
     }
+    // Black Castle
     if(this.BoW() == BLACK){
+      // Left Black Castle
+      if(start.getX() == 4 && start.getY() == 0 && end.getX() == 2 && end.getY() == 0){
+        
+        Cell C = new Cell(0, 0, new Rook(BLACK));
+        if(board.getCell(0,0).getPiece() == C.getPiece()){
+          if(board.getCell(1, 0).getPiece() == null && 
+             board.getCell(2, 0).getPiece() == null && 
+             board.getCell(3, 0).getPiece() == null){
+            return true;   
+          }
+        }
+      }
       
+      // Right Black Castle 
+      else if(start.getX() == 4 && start.getY() == 0 && end.getX() == 6 && end.getY() == 0){
+        Cell C = new Cell(7, 0, new Rook(BLACK));
+        if(board.getCell(7,0).getPiece() == C.getPiece()){
+          if(board.getCell(6, 0).getPiece() == null && 
+             board.getCell(5, 0).getPiece() == null){
+            return true;   
+          }
+        }
+      }
     }
   }
   
