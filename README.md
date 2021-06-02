@@ -27,4 +27,12 @@ Development Log:
 05/28/21: I finished up the prototype and built a sketch file that projects a basic chessboard.
 
 06/01/21: I finished the prototype (including UML drawings and updated the class structure). I began writing the board and pieces classes.
-I decided the board and piece class sturcutre might be a tad messy, so I'm attempting to do it without those elements. I've started by attempting to draw a board in blue and white and place the pieces on that board. I've also attempted to work on checks, movement, possible moves and other things. 
+I decided the board and piece class sturcutre might be a tad messy, so I'm attempting to do it without those elements. I've started by attempting to draw a board in blue and white and place the pieces on that board. I've also attempted to work on checks, movement, possible moves and other things.
+
+Ok Update later on in the same day: the object oriented appraoch was most definetly clearer and better. I'm deleting my current structure and restarting.
+
+What needs implementing in King Class:
+-inCheck Method: tells whether or not the king is in check on a square
+--> Might need other classes written first (the extension of what squares each piece threatens is crucial)
+
+-For Castling, I need to make sure neither the king or rook as moved. (the rook hasmoved method doens't transfer)
