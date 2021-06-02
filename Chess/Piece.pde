@@ -1,4 +1,6 @@
 public abstract class Piece{
+  private boolean WHITE = false; 
+  private boolean BLACK = true;
   private boolean alive = false;
   private boolean BoW = false; 
   // White = False
