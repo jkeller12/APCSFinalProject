@@ -1,7 +1,6 @@
 // Boolean for selected piece
 boolean click;
-Game game;
-game.init(
+//Board board = new Board();  
 void setup(){
   size(640,640);
   noStroke();
@@ -22,7 +21,7 @@ void drawBoard(){
 
     // Places pieces
 
-   if(game.getBoard().getCell(j, i).getPiece() != null) image(game.getBoard().getGraphicBoard()[j][i], i*width/8, j*height/8);
+   //if(board.getCell(j, i).getPiece() != null) image(board.getGraphicBoard()[j][i], i*width/8, j*height/8);
 
     // Highlighting?
 

@@ -35,13 +35,13 @@ public class King extends Piece{
     }
     return this.isCastlePossible(board, start, end);
   }
-  
+  /*
   private boolean inCheck(Board board, Cell pos){
     if(this.BoW() == WHITE){
       
     }
     return false; 
-  }
+  }*/
   
   
   private boolean isCastlePossible(Board board, Cell start, Cell end){
