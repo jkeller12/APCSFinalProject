@@ -1,6 +1,8 @@
 // Boolean for selected piece
 Board Chessboard; 
 PImage[][] board;
+boolean WHITE = false; 
+boolean BLACK = true; 
 Player p1 = new Player(false); 
 Game game; 
 
@@ -11,24 +13,33 @@ void setup(){
   textAlign(CENTER);
   game = new Game();  //<>//
   Chessboard = game.getBoard(); 
+  
   p1 = game.getPlayers()[0]; 
-  Cell c0 = Chessboard.getCell(0, 7); 
-  Cell c1 = Chessboard.getCell(1, 7); 
-  Cell c2 = Chessboard.getCell(2, 7); 
-  Cell c3 = Chessboard.getCell(3, 7); 
-  Cell c4 = Chessboard.getCell(4, 7); 
+  Player p2 = game.getPlayers()[1]; 
+   
+  Cell w0 = Chessboard.getCell(1, 6); 
+  Cell w1 = Chessboard.getCell(1, 5); 
+
+
+  Cell c0 = Chessboard.getCell(7, 0); 
+  Cell c1 = Chessboard.getCell(6, 0); 
+  Cell c2 = Chessboard.getCell(5, 0); 
+  Cell c3 = Chessboard.getCell(4, 0); 
+  Cell c4 = Chessboard.getCell(3, 0); 
+
   c1.setPiece(null);
   c2.setPiece(null);
-  c3.setPiece(null);
+  //c3.setPiece(null);
 
-  Move move = new Move(p1, c4, c0); 
+  // Black Castle
   
-  System.out.println(move);
-  System.out.println(c1.getPiece()); 
-  System.out.println(c2.getPiece()); 
   
- // System.out.println(c1.getPiece().movable(Chessboard, c1, c2));
-  System.out.println(game.ExecuteMove(p1,  move));
+  Move move1 = new Move(p1, w0, w1); 
+  System.out.println(game.ExecuteMove(p1,  move1));
+  
+  Move move = new Move(p1, c3, c1); 
+  System.out.println(game.ExecuteMove(p2,  move));
+
   start();
 }
 void start(){
