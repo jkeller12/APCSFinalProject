@@ -19,7 +19,7 @@ public class Rook extends Piece{
   }
   
   public boolean movable(Board board, Cell start, Cell end){
-    if(end.getPiece().BoW() == this.BoW()) return false; // If same color, then no
+    if(end.getPiece() != null && end.getPiece().BoW() == this.BoW()) return false; // If same color, then no
     int xi = start.getX(); 
     int xf = end.getX(); 
     int yi = start.getY(); 

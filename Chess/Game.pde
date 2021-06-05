@@ -10,8 +10,8 @@ public class Game{
   public Game(){
     
     players = new Player[2];
-    Player p1 = new Player(false);
-    Player p2 = new Player(true);
+    Player p1 = new Player(WHITE);
+    Player p2 = new Player(BLACK);
     movesPlayed = new ArrayList<Move>();
     this.setState(GameState.ACTIVE);
     this.init(p1, p2);
@@ -21,11 +21,13 @@ public class Game{
     
     players[0] = p1;
     players[1] = p2;
-    this.currentTurn = p1;
+    this.currentTurn = players[0];
     board.init(); // i know this works
   }
   
-  
+  public Player[] getPlayers(){
+    return this.players; 
+  }
   public Board getBoard(){
     return this.board; 
   }
@@ -46,15 +48,26 @@ public class Game{
   
   
   public boolean ExecuteMove(Player player, Move move){
+    
     Piece start = move.getStart().getPiece();
-    if(start == null) return false; // if empty square false
-    if(player != currentTurn) return false; // if not turn ret false
-    if(start.BoW() != player.isBoW()) return false; // if piece not player's ret false
-
+    if(start == null){
+      System.out.println("Null Start");
+      return false; // if empty square false
+    }
+    if(player != currentTurn){
+      System.out.println("Not your turn");
+      return false; // if not turn ret false
+    }
+    if(start.BoW() != player.isBoW()){
+      System.out.println("Piece accessed isn't color of player");
+      return false; // if piece not player's ret false
+    }
     // Movable
     
-    if(!start.movable(board, move.getStart(), move.getEnd())) return false; // If piece can't move from a to b, ret false
-
+    if(!start.movable(board, move.getStart(), move.getEnd())){
+      System.out.println("Piece doesn't have abiity to move to end square"); 
+      return false; // If piece can't move from a to b, ret false
+    }
 
     // Capture
     Piece target_piece = move.getEnd().getPiece(); // get piece at destination

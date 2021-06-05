@@ -9,8 +9,22 @@ void setup(){
   noStroke();
   textSize(width/8);
   textAlign(CENTER);
-  Chessboard = new Board();  //<>//
-  game = new Game(); 
+  game = new Game();  //<>//
+  Chessboard = game.getBoard(); 
+  p1 = game.getPlayers()[0]; 
+  
+  Cell c1 = Chessboard.getCell(4, 7); 
+  Cell c2 = Chessboard.getCell(3, 7); 
+  c2.setPiece(null); 
+  //Cell c3 = Chessboard.getCell(0,0); 
+  Move move = new Move(p1, c1, c2); 
+  
+  System.out.println(move);
+  System.out.println(c1.getPiece()); 
+  System.out.println(c2.getPiece()); 
+  
+ // System.out.println(c1.getPiece().movable(Chessboard, c1, c2));
+  System.out.println(game.ExecuteMove(p1,  move));
   start();
 }
 void start(){

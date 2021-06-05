@@ -12,7 +12,7 @@ public class Bishop extends Piece{
   }
 
   public boolean movable(Board board, Cell start, Cell end){
-    if(end.getPiece().BoW() == this.BoW()) return false;
+    if(end.getPiece() != null && end.getPiece().BoW() == this.BoW()) return false;
      int xi = start.getX();
      int xf = end.getX();
      int yi = start.getY();

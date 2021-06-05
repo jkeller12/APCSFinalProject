@@ -26,7 +26,7 @@ public class King extends Piece{
   }
   
   public boolean movable(Board board, Cell start, Cell end){
-    if(end.getPiece().BoW() == this.BoW()) return false; // If same color, then no
+    if(end.getPiece() != null && end.getPiece().BoW() == this.BoW()) return false; // If same color, then no
     
     if((abs(start.getX() - end.getX()) <= 1) && (abs(start.getY() - end.getY()) <= 1)){
        // if(isChecked) return false; 

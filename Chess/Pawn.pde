@@ -18,7 +18,7 @@ public class Pawn extends Piece{
     return Image;
   }
   public boolean movable(Board board, Cell start, Cell end){
-    if(end.getPiece().BoW() == this.BoW()) return false; // If same color, then no
+    if(end.getPiece() != null && end.getPiece().BoW() == this.BoW()) return false; // If same color, then no
     
     if(abs(end.getY() - start.getY()) > 2) return false; 
     
@@ -38,11 +38,11 @@ public class Pawn extends Piece{
     // Captures
     
     // White
-    if(this.BoW() == WHITE && end.getPiece().BoW() == BLACK){
+    if(this.BoW() == WHITE && end.getPiece() != null && end.getPiece().BoW() == BLACK){
       if(end.getY() - start.getY() == -1 && abs(end.getX() -start.getX()) == 1) return true; 
     }
     
-    if(this.BoW() == BLACK && end.getPiece().BoW() == WHITE){
+    if(this.BoW() == BLACK && end.getPiece() != null && end.getPiece().BoW() == WHITE){
       if(end.getY() - start.getY() == 1 && abs(end.getX() - start.getX()) == 1) return true; 
     }
     
