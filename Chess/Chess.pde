@@ -12,12 +12,16 @@ void setup(){
   game = new Game();  //<>//
   Chessboard = game.getBoard(); 
   p1 = game.getPlayers()[0]; 
-  
-  Cell c1 = Chessboard.getCell(4, 7); 
-  Cell c2 = Chessboard.getCell(3, 7); 
-  c2.setPiece(null); 
-  //Cell c3 = Chessboard.getCell(0,0); 
-  Move move = new Move(p1, c1, c2); 
+  Cell c0 = Chessboard.getCell(0, 7); 
+  Cell c1 = Chessboard.getCell(1, 7); 
+  Cell c2 = Chessboard.getCell(2, 7); 
+  Cell c3 = Chessboard.getCell(3, 7); 
+  Cell c4 = Chessboard.getCell(4, 7); 
+  c1.setPiece(null);
+  c2.setPiece(null);
+  c3.setPiece(null);
+
+  Move move = new Move(p1, c4, c0); 
   
   System.out.println(move);
   System.out.println(c1.getPiece()); 
