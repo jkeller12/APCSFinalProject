@@ -3,6 +3,7 @@ public class Board{
   boolean BLACK = true;
   private Cell[][] board;
   private PImage[][] graphicBoard;
+  private int[][] threatened;
   public Board(){
    this.init();
   }
@@ -22,6 +23,7 @@ public class Board{
     // Pawns
     board = new Cell[8][8];
     graphicBoard = new PImage[8][8];
+    threatened = new int[8][8];
     
     // Pawns
     for(int c = 0; c <= 7; c++){
@@ -61,5 +63,7 @@ public class Board{
         }
       }
     }
+    
+    
   }
 }

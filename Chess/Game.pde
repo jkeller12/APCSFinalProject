@@ -2,48 +2,62 @@ public class Game{
   private boolean WHITE = false;
   private boolean BLACK = true;
   private Player[] players;
-  private Board board;
+  private Board board = new Board();
   private Player currentTurn;
   private GameState state;
   private ArrayList<Move> movesPlayed;
 
-  
-  public void init(Player p1, Player p2){
-    players[0] = p1;
-    players[1] = p2;
-
-    board.init();
-
-    if(p1.isBoW() == WHITE) this.currentTurn = p1;
-    else this.currentTurn = p2;
-
+  public Game(){
+    
+    players = new Player[2];
+    Player p1 = new Player(false);
+    Player p2 = new Player(true);
+    this.setState(GameState.ACTIVE);
+    this.init(p1, p2);
     movesPlayed.clear();
   }
+  public void init(Player p1, Player p2){
+    
+    players[0] = p1;
+    players[1] = p2;
+    this.currentTurn = p1;
+    board.init(); // i know this works
+  }
+  
   
   public Board getBoard(){
     return this.board; 
   }
+  
   public GameState getState(){
     return this.state;
   }
+  
   public void setState(GameState s){
     this.state = s;
   }
+  
   public boolean isGameOver(){
     return this.getState() != GameState.ACTIVE;
   }
+  
+  
+  
+  
   public boolean ExecuteMove(Player player, Move move){
     Piece start = move.getStart().getPiece();
-    if(start == null) return false;
-    if(player != currentTurn) return false;
-    if(start.BoW() != player.isBoW()) return false;
+    if(start == null) return false; // if empty square false
+    if(player != currentTurn) return false; // if not turn ret false
+    if(start.BoW() != player.isBoW()) return false; // if piece not player's ret false
 
     // Movable
-    if(!start.movable(board, move.getStart(), move.getEnd())) return false;
+    
+    if(!start.movable(board, move.getStart(), move.getEnd())) return false; // If piece can't move from a to b, ret false
+
 
     // Capture
-    Piece target_piece = move.getEnd().getPiece();
-    if(target_piece != null){
+    Piece target_piece = move.getEnd().getPiece(); // get piece at destination
+    if(target_piece != null){ // If target square has a piece, set it to false, and store it in instance of move
        target_piece.setAlive(false);
        move.setPieceKilled(target_piece);
     }
@@ -51,10 +65,10 @@ public class Game{
     // Castle
 
     if(start instanceof King && ((King)start).isCastlePossible(board, move.getStart(), move.getEnd())){
-      move.setCastle(true);
+      move.setCastle(true); 
     }
 
-    movesPlayed.add(move);
+    movesPlayed.add(move); 
 
     move.getEnd().setPiece(move.getStart().getPiece());
     move.getStart().setPiece(null);

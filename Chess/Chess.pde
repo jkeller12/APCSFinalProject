@@ -1,7 +1,8 @@
 // Boolean for selected piece
 Board Chessboard; 
 PImage[][] board;
-
+Player p1 = new Player(false); 
+Game game; 
 
 void setup(){
   size(640,640);
@@ -9,11 +10,18 @@ void setup(){
   textSize(width/8);
   textAlign(CENTER);
   Chessboard = new Board();  //<>//
+  game = new Game(); 
   start();
 }
 void start(){
   System.out.println("");
 }
+ //<>//
+void draw(){
+  drawBoard();
+  
+}
+
 void drawBoard(){
   for(int i = 0; i <= 7; i++){
     for(int j = 0; j <= 7; j++){
@@ -25,9 +33,8 @@ void drawBoard(){
       if(!(Chessboard.getCell(j, i).getPiece() == null)){
         image(Chessboard.getCell(j,i).getPiece().getImage(), j*width/8, i*height/8);
       }
+      
+      
     }
-  } //<>//
-}
-void draw(){
-  drawBoard();
+  }
 }
