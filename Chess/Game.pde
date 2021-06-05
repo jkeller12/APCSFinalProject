@@ -5,7 +5,7 @@ public class Game{
   private Board board = new Board();
   private Player currentTurn;
   private GameState state;
-  private ArrayList<Move> movesPlayed;
+  private ArrayList<Move> movesPlayed = new ArrayList<Move>();
 
   public Game(){
     
