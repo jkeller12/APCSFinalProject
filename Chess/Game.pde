@@ -5,13 +5,14 @@ public class Game{
   private Board board = new Board();
   private Player currentTurn;
   private GameState state;
-  private ArrayList<Move> movesPlayed = new ArrayList<Move>();
+  private ArrayList<Move> movesPlayed;
 
   public Game(){
     
     players = new Player[2];
     Player p1 = new Player(false);
     Player p2 = new Player(true);
+    movesPlayed = new ArrayList<Move>();
     this.setState(GameState.ACTIVE);
     this.init(p1, p2);
     movesPlayed.clear();
