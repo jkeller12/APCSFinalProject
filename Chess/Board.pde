@@ -56,8 +56,8 @@ public class Board{
     // Load Graphics
     for(int r = 0; r < 8; r++){
       for(int c = 0; c < 8; c++){
-        if(board[r][c].getPiece() != null){
-          graphicBoard[r][c] = board[r][c].getPiece().getImage();
+        if(this.getCell(c,r).getPiece() != null){
+          graphicBoard[r][c] = this.getCell(c,r).getPiece().getImage();
         }
       }
     }
