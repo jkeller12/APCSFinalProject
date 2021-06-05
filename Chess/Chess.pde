@@ -13,33 +13,12 @@ void setup(){
   textAlign(CENTER);
   game = new Game();  //<>//
   Chessboard = game.getBoard(); 
-  
-  p1 = game.getPlayers()[0]; 
-  Player p2 = game.getPlayers()[1]; 
-   
-  Cell w0 = Chessboard.getCell(1, 6); 
-  Cell w1 = Chessboard.getCell(1, 5); 
-
-
-  Cell c0 = Chessboard.getCell(7, 0); 
-  Cell c1 = Chessboard.getCell(6, 0); 
-  Cell c2 = Chessboard.getCell(5, 0); 
-  Cell c3 = Chessboard.getCell(4, 0); 
-  Cell c4 = Chessboard.getCell(3, 0); 
-
-  c1.setPiece(null);
-  c2.setPiece(null);
-  //c3.setPiece(null);
-
-  // Black Castle
-  
-  
-  Move move1 = new Move(p1, w0, w1); 
-  System.out.println(game.ExecuteMove(p1,  move1));
-  
-  Move move = new Move(p1, c3, c1); 
-  System.out.println(game.ExecuteMove(p2,  move));
-
+  Chessboard.getCell(0, 1).setPiece(new Pawn(WHITE));
+  Chessboard.getCell(0, 0).setPiece(null);
+  Cell c1 = Chessboard.getCell(0, 1); 
+  Cell c2 = Chessboard.getCell(0, 0); 
+  Move m = new Move(p1, c1, c2); 
+  game.ExecuteMove(p1, m); 
   start();
 }
 void start(){
@@ -62,8 +41,54 @@ void drawBoard(){
       if(!(Chessboard.getCell(j, i).getPiece() == null)){
         image(Chessboard.getCell(j,i).getPiece().getImage(), j*width/8, i*height/8);
       }
-      
-      
     }
   }
+  if (game.getPromote() && game.getState() == GameState.ACTIVE){
+    
+    stroke(2);
+    fill(200, 100);
+    rect(0, 0, 2*width/8, height);
+    rect(2*width/8, 0, 2*width/8, height);
+    rect(4*width/8, 0, 2*width/8, height);
+    rect(6*width/8, 0, 2*width/8, height);
+    if (game.getCurrentTurn() == WHITE){
+      image(Chessboard.getCell(7,3).getPiece().getImage(), 0.5*width/8, 3.5*height/8);
+      image(Chessboard.getCell(7,7).getPiece().getImage(), 2.5*width/8, 3.5*height/8);
+      image(Chessboard.getCell(7,2).getPiece().getImage(), 4.5*width/8, 3.5*height/8);
+      image(Chessboard.getCell(7,1).getPiece().getImage(), 6.5*width/8, 3.5*height/8);
+    } else {
+      image(Chessboard.getCell(0,3).getPiece().getImage(), 0.5*width/8, 3.5*height/8);
+      image(Chessboard.getCell(0,7).getPiece().getImage(), 2.5*width/8, 3.5*height/8);
+      image(Chessboard.getCell(0,6).getPiece().getImage(), 4.5*width/8, 3.5*height/8);
+      image(Chessboard.getCell(0,5).getPiece().getImage(), 6.5*width/8, 3.5*height/8);
+    }
+    noStroke();
+  }
+}
+
+void mousePressed(){
+   if(game.isGameOver()) start();
+   if(game.getPromote()){
+     int x = round(mouseX/ (width/4)-0.5);
+     Move LastMove = game.getMovesPlayed().get(game.getMovesPlayed().size()-1);
+     Cell End = LastMove.getEnd(); 
+     if (game.getCurrentTurn() == WHITE){
+       if (x == 0) End.setPiece(new Queen(WHITE));
+       if (x == 1) End.setPiece(new Rook(WHITE));
+       if (x == 2) End.setPiece(new Bishop(WHITE));
+       if (x == 3) End.setPiece(new Knight(WHITE));
+    } 
+    else if(game.getCurrentTurn() == BLACK){
+      if (x == 0) End.setPiece(new Queen(BLACK));
+      if (x == 1) End.setPiece(new Rook(BLACK));
+      if (x == 2) End.setPiece(new Bishop(BLACK));
+      if (x == 3) End.setPiece(new Knight(BLACK));
+    }
+   }
+   game.setPromote(false); 
+   
+   // if (check) 
+   
+   // if(mate)
+     
 }

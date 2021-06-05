@@ -27,7 +27,6 @@ public class King extends Piece{
   
   public boolean movable(Board board, Cell start, Cell end){
     if(end.getPiece() != null && end.getPiece().BoW() == this.BoW()) return false; // If same color, then no
-     System.out.println("got through"); 
   
     if(this.isCastlePossible(board, start, end)){ // if(isChecked) return false; 
        /// IMPLEMENT isChecked;
@@ -35,6 +34,8 @@ public class King extends Piece{
     }
     return ((abs(start.getX() - end.getX()) <= 1) && (abs(start.getY() - end.getY()) <= 1));
   }
+  
+  
   /*
   private boolean inCheck(Board board, Cell pos){
     if(this.BoW() == WHITE){

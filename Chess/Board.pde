@@ -4,6 +4,8 @@ public class Board{
   private Cell[][] board;
   private PImage[][] graphicBoard;
   private int[][] threatened;
+  
+  
   public Board(){
    this.init();
   }

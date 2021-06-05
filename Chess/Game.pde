@@ -5,6 +5,8 @@ public class Game{
   private Board board = new Board();
   private Player currentTurn;
   private GameState state;
+  private boolean promote; 
+  private boolean check;
   private ArrayList<Move> movesPlayed;
 
   public Game(){
@@ -12,7 +14,11 @@ public class Game{
     players = new Player[2];
     Player p1 = new Player(WHITE);
     Player p2 = new Player(BLACK);
+    
+    this.promote = false; 
+    this.check = false; 
     movesPlayed = new ArrayList<Move>();
+    
     this.setState(GameState.ACTIVE);
     this.init(p1, p2);
     movesPlayed.clear();
@@ -40,10 +46,25 @@ public class Game{
     this.state = s;
   }
   
+  public boolean getPromote(){
+     return this.promote;  
+  }
+  
+  public void setPromote(boolean b){
+    this.promote = b; 
+  }
+  
   public boolean isGameOver(){
     return this.getState() != GameState.ACTIVE;
   }
- 
+  public boolean getCurrentTurn(){
+    return this.currentTurn.isBoW(); 
+  }
+  public ArrayList<Move> getMovesPlayed(){
+    return this.movesPlayed;
+  }
+
+   
   
   
   
@@ -120,10 +141,22 @@ public class Game{
     }
 
     movesPlayed.add(move); 
-
+    if(move.getStart().getPiece() instanceof Pawn){
+      if(move.getStart().getPiece().BoW() == WHITE && move.getEnd().getY() == 0){
+        setPromote(true);  
+      }
+      if(move.getStart().getPiece().BoW() == BLACK && move.getEnd().getY() == 7){
+        setPromote(true); 
+      }
+      else setPromote(false); 
+    }
+    
     move.getEnd().setPiece(move.getStart().getPiece());
     move.getEnd().getPiece().setMoved(true); 
     move.getStart().setPiece(null);
+    
+    
+    
     // End Game Scneario
     if(target_piece != null && target_piece instanceof King){
       if(player.isBoW() == WHITE) this.setState(GameState.WHITE_WIN);
