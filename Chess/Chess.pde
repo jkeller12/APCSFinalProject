@@ -13,9 +13,11 @@ void setup(){
   noStroke();
   textSize(width/8);
   textAlign(CENTER);
-  pawnB = new Pawn(true); 
+  
+  pawnB = new Pawn(true);  //<>//
   pawnImage = pawnB.getImage(); 
   Chessboard = new Board();
+  
   start();
 }
 void start(){
