@@ -139,20 +139,24 @@ public class Game{
         }
       }
     }
-
+    
     movesPlayed.add(move); 
-    if(move.getStart().getPiece() instanceof Pawn){
-      if(move.getStart().getPiece().BoW() == WHITE && move.getEnd().getY() == 0){
-        setPromote(true);  
-      }
-      if(move.getStart().getPiece().BoW() == BLACK && move.getEnd().getY() == 7){
-        setPromote(true); 
-      }
-      else setPromote(false); 
-    }
     
     move.getEnd().setPiece(move.getStart().getPiece());
+
+    if(move.getStart().getPiece() instanceof Pawn){
+      if(move.getStart().getPiece().BoW() == WHITE && move.getEnd().getY() == 0){
+        Queen q = new Queen(WHITE); 
+        move.getEnd().setPiece(q); 
+      }
+      if(move.getStart().getPiece().BoW() == BLACK && move.getEnd().getY() == 7){
+        Queen q1 = new Queen(BLACK); 
+        move.getEnd().setPiece(q1); 
+      } 
+    }
+    
     move.getEnd().getPiece().setMoved(true); 
+    
     move.getStart().setPiece(null);
     
     

@@ -18,7 +18,8 @@ void setup(){
   Cell c1 = Chessboard.getCell(0, 1); 
   Cell c2 = Chessboard.getCell(0, 0); 
   Move m = new Move(p1, c1, c2); 
-  game.ExecuteMove(p1, m); 
+  System.out.println(game.getCurrentTurn()); 
+  game.ExecuteMove(game.getPlayers()[0], m); 
   start();
 }
 void start(){
@@ -65,7 +66,7 @@ void drawBoard(){
     noStroke();
   }
 }
-
+/*
 void mousePressed(){
    if(game.isGameOver()) start();
    if(game.getPromote()){
@@ -91,4 +92,4 @@ void mousePressed(){
    
    // if(mate)
      
-}
+}*/
