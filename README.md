@@ -4,42 +4,59 @@ Group Number: 19
 Group Members: Jonah Keller
 Prototype Link: https://tinyurl.com/4kpv9dkk
 
-Brief Project Description: I will be making a game of Chess Puzzles (similar to the puzzle section of chess.com). I will hopefully have a timer, a series of puzzles (or levels), orientation options, and a section for marking your "correctness."
+Brief Project Description: I will be making a game of Chess. I will hopefully have a timer, orientation options, and all the regular rules of chess.
 
 Expanded Descriptions:
-Critical Features: Chess board with movable pieces that follow the rules of chess; series of predetermined chess boards with pre-determined solutions to puzzles.
-Nice to have: timer, “correctness” tracker, and orientation options.
+Critical Features: Chess board with movable pieces that follow the rules of chess and can take user input from the mouse.
+Nice to have: timer, "take-back" move option, and orientation options.
 
 Outline:
-I’ll have a Board.java class where I’ll create the board.
-The board will be -1 for occupied by white, 0 for nothing, and 1 for black.
-I’ll have a subclass of board that i
-I’ll have a super class of pieces and create subclasses for each piece in chess.
-The pieces class will have instance variables of color and position (col and row)
-The pieces class will have a constructor that takes in int color, int col, int row.
-The subclass for each piece will have an instance variable that stores possible moves based on the piece’s position (w/o location of other pieces).`
-I’ll then have a methods file with the following methods:
-A piece mover method that’ll move pieces around
+chess class
+-Initialize game and start drawing
+Board class
+-Initialize pieces (Actor class) and getActor/setActor etc methods.
+Actor classe
+-Will contain methods necessary for all child classes
+Pawn/Rook/Knight...King classes
+-Will contain method to provide all available moves for the piece.
 
+Game class
+-Will initialize, track/play, and end the game, including graphics.
 
+Player class
+-Will track eligible moves and
 
 Development Log:
 05/28/21: I finished up the prototype and built a sketch file that projects a basic chessboard.
 
-06/01/21: I finished the prototype (including UML drawings and updated the class structure). I began writing the board and pieces classes.
-I decided the board and piece class sturcutre might be a tad messy, so I'm attempting to do it without those elements. I've started by attempting to draw a board in blue and white and place the pieces on that board. I've also attempted to work on checks, movement, possible moves and other things.
+06/01/21:
+-Finished the prototype (including UML drawings and updated the class structure). I began writing the board and pieces classes.
+-I decided the board and piece class structure might be a tad messy, so I'm attempting to do it without those elements. I've started by attempting to draw a board in blue and white and place the pieces on that board. I've also attempted to work on checks, movement, possible moves and other things.
 
-Ok Update later on in the same day: the object oriented appraoch was most definetly clearer and better. I'm deleting my current structure and restarting.
 
-Future Necessary Implements:
+06/02/21
+-The object oriented approach was most definetely clearer and better. I'm deleting my current structure and restarting.
+-Implementing Board = cell[][], cell contains piece, piece is abstract for ind. pieces OOP structure. Game class for running game, move class for implementing moves, and player class for keeping white/black sides
 
--inCheck Method
--->Tells whether or not the king is in check on a square
---> MUST ADD TO END OF EACH MOVABLE method: a piece can't move so that their king becomes checked
---> Might need other classes written first (the extension of what squares each piece threatens is crucial)
+06/04/21
+-Implemented castling method
+-Implemented en-passant
+-Checked all pieces for each move type so no faults
+-Cleared up
+-Debugging error in init of Game class
+-Projecting board image properly
+-Board works
 
--For Castle, check for king or rook prior moves. (the rook hasmoved method doens't transfer)
+06/05/21
+-Implemented queen fix
+-Fixing pawn promotion (and trying out graphics for it)
+-Fixed final error of castling (w/o incheck or indanger methods yet)
 
-- threatens
---> Idea: when board is initialzied an array of threatened squares is created. Upon each move, that array is updated
---> Problem: computing time needed, is there a better approach? 
+06/07/21
+-Combined piece and cell class into actor classe
+-Rewrote the game, and board classes to accomodate.
+-Cleared up instance variables.
+-Cleared up castling methods, incheck methods
+-Board/game graphics implemented.
+
+```
