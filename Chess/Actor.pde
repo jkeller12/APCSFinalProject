@@ -26,4 +26,20 @@ public class Actor{
   
   // The foward direction of actor, depends on color
   public int direction = 0; 
+  
+  // Stored Moves
+  ArrayList<Move> previousMoves = new ArrayList<Move>(); 
+  
+  int titleDimensions = 0; 
+  
+  // Whether actor is white or black 
+  
+  boolean white = false; 
+  public Player player; 
+  public Player opponent; 
+  
+  PImage img; 
+  public String name = "Pawn"; 
+  
+  
 }
