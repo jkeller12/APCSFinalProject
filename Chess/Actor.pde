@@ -1,149 +1,175 @@
-public class Move{
-  // Initial Position/Piece
-  public Actor source; 
+// Actor move
+class Move {
+  // Source actor
+  public Actor source;
   
-  // Target Position/Piece
-  public Actor target; 
-  
-  public int x; 
-  public int y; 
-  
-  public Move(int x, int y, Actor target){
-    this.target = target; 
-    this.x = x; 
-    this.y = y; 
-  } 
+  // Target actor
+  public Actor target;
+
+  // Target position
+  public int x;
+  public int y;
+
+  // Creating move
+  public Move(int x, int y, Actor target) {
+    this.target = target;
+    this.x = x;
+    this.y = y;
+  }
 }
 
-public class Actor{
-  // Number of Actor
-  public int id; 
+class Actor {
+  // Unique id of actor
+  public int id;
+
+  // Position of actor
+  public int posX = 0;
+  public int posY = 0;
+
+  // The forward direction of the actor, depends on color
+  public int direction = 0;
+
+  // Stored moves
+  ArrayList<Move> previousMoves = new ArrayList<Move>();
+
+  // The tile dimensions of renderer
+  int tileDimensions = 0;
   
-  // Position of Actor
+  // Whether actor is white or black
+  boolean white = false;
+  public Player player;
+  public Player opponent;
   
-  public int posX = 0; 
-  public int posY = 0; 
-  
-  // The foward direction of actor, depends on color
-  public int direction = 0; 
-  
-  // Stored Moves
-  ArrayList<Move> previousMoves = new ArrayList<Move>(); 
-  
-  int titleDimensions = 0; 
-  
-  // Whether actor is white or black 
-  
-  boolean white = false; // White--> false, black --> true
-  public Player player; 
-  public Player opponent; 
-  
-  PImage img; 
-  public String name = "Pawn"; 
-  
-  
-  // Constructor w/ color
-  public Actor(int posX, int posY, boolean white){
-    super(); 
-    // Store init pos
+  // Image of actor
+  PImage img;
+
+  public String name = "Pawn";
+  public Actor(int posX, int posY, boolean white) {
+    super();
     
-    this.posX = posX; 
-    this.posY = posY; 
-    this.white = white; 
-    // Direction Set
+    // Storing initial position and color
+    this.posX = posX;
+    this.posY = posY;
+    this.white = white;
+
+    // Setting forward direction
+    direction = white ? -1 : 1;
     
-    direction = white ? -1 : 1; 
+    // This is bad practise, should use either static auto incrementation on uuid
+    this.id = (int)(random(1000) * 1000.0);
+  }
+
+  public Actor(int posX, int posY) {
+    super();
     
-    this.id = (int)(random(1000) * 1000.0); 
+    // Storing initial position and color
+    this.posX = posX;
+    this.posY = posY;
+    
+    // This is bad practise, should use either static auto incrementation on uuid
+    this.id = (int)(random(1000) * 1000.0);
   }
-  // If no color given
-  public Actor(int posX, int posY){
-   super(); 
-   
-   this.posX = posX; 
-   this.posY = posY; 
-   
-   this.id = (int)(random(1000) * 1000.0); 
-  }
-  
-  public void setPlayer(Player player, Player opponent){
-    this.player = player; 
-    this.opponent = opponent; 
-  }
-  // Autoload paced on jpg name
-  public void setup(){
-    String colorName = white ? "White" : "Black"; 
-    img = loadImage("images/" + colorName + name + ".png"); 
+
+  public void setColor(boolean white) {
+    // Setting forward direction
+    direction = white ? -1 : 1;
+    this.white = white;
+  } 
+
+  public void setPlayer(Player player, Player oppponent) {
+    this.player = player;
+    this.opponent = oppponent;
   }
   
-  public void setTitleDimensions(int dimensions){
-    titleDimensions = dimensions; 
+  // Seup actor
+  public void setup() {
+    String colorName = white ? "White" : "Black";
+    img = loadImage("images/" + colorName + name + ".png");
   }
   
-  // Check if target square is same color 
-  
-  public boolean isAlly(Actor actor){
-    if(actor == null) return false; 
-    return actor.white == this.white; 
+  // Saving tile dimensions
+  public void setTileDimensions(int dimensions) {
+    tileDimensions = dimensions;
+  }
+
+  // Check if an other actor is ally
+  public boolean isAlly(Actor actor) {
+    if (actor == null) return false;
+    return actor.white == this.white;
   }
   
-  public ArrayList<Move> getAvailableMoves(Board board){
-    return new ArrayList<Move>(); 
+  // Generated all available moves
+  public ArrayList<Move> getAvailableMoves(Board board) {
+    // Return empty array
+    return new ArrayList<Move>();
   }
-  
-  public ArrayList<Move> getAllMoves(Board board){
-    ArrayList<Move> moves = getAvailableMoves(board); 
-    for(int i = moves.size()-1; i >= 0; i--){
-     Move move = moves.get(i); 
-     if(!checkForCheckSolution(board, move)) moves.remove(i); 
+
+  // Generate all, checked moves
+  public ArrayList<Move> getAllMoves(Board board) {
+    ArrayList<Move> moves = getAvailableMoves(board);
+    for (int i = moves.size() - 1; i >= 0; i--) {
+      Move move = moves.get(i);
+      if (!checkForCheckSolution(board, move)) moves.remove(i);
     }
-    return moves; 
+    return moves;
+  }
+
+  // Move actor to new location
+  // This is where animation would happen
+  public Actor moveTo(Move move) {
+    previousMoves.add(move);
+    setPosition(move.x, move.y);
+    return this;
   }
   
-  public Actor moveTo(Move move){
-    previousMoves.add(move); 
-    setPosition(move.x, move.y); 
-    return this; 
+  // Set the position of the actor
+  public void setPosition(int x, int y) {
+    posX = x;
+    posY = y;
   }
-  public void setPosition(int x, int y){
-    this.posX = x; 
-    this.posY = y; 
+ 
+  // Drawing actor
+  public void draw(boolean selected) {
+    // Calculating pixel positions
+    int x = posX * tileDimensions;
+    int y = posY * tileDimensions;
+
+    // Checking if actor is selected
+    if (selected) {
+      fill(200, 200, 0, 100);
+      rect(x, y, tileDimensions, tileDimensions);
+    }
+
+    // Drawing actor's image
+    imageMode(CENTER);
+    image(img, x + tileDimensions / 2, y + tileDimensions / 2, tileDimensions, tileDimensions);
   }
-  
-  // Function to draw in actor
-  
-  public void draw(boolean selected){
-   int x = this.posX * titleDimensions; 
-   int y = this.posY * titleDimensions; 
-   
-   if(selected){
-     fill(200, 200, 0, 100);
-     rect(x, y, titleDimensions, titleDimensions); 
-   }
-   imageMode(CENTER); 
-   image(img, x + titleDimensions / 2, y + titleDimensions / 2, titleDimensions, titleDimensions); 
+
+  // Return if actor is in danger (only used by kings)
+  public boolean isInDanger(Board board) {
+    return false;
   }
-  
-  // Return if King is in danger (myb move to king class) 
-  
-  public boolean isInDanger(Board board){
-    return false; 
-  }
-  
-  public void checkForDanger(Board board){} // Used by kings 
-  
-  public boolean checkForCheckSolution(Board board, Move move){
-    boolean result =false; 
-    int x0 = this.posX; 
-    int y0 = this.posY; 
+
+  // Check if actor is in danger (only used by kings)
+  public void checkForDanger(Board board) {}
+
+  public boolean checkForCheckSolution(Board board, Move move) {
+    boolean result = false;
+    int prevX = this.posX;
+    int prevY = this.posY;
     
-    this.posX = move.x; 
-    this.posY = move.y; 
-    ArrayList<Move> moves = player.generateAttackedfields(board); 
-    result = player.checkSolution(moves); 
-    this.posX = x0; 
-    this.posY = y0; 
-    return !result; 
+    this.posX = move.x;
+    this.posY = move.y;
+    
+    ArrayList<Move> moves = player.generateAttackedfields(board);
+    result = player.checkSolution(moves);
+    
+    this.posX = prevX;
+    this.posY = prevY;
+
+    return !result;
+
+    // TODO: check if the actor takes the attacker
+
   }
-  // ToDo: check if actor takes attacker
 }
