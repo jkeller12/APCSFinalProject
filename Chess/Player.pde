@@ -1,22 +1,24 @@
-public class Player{
-  ArrayList<Actor> actors = new ArrayList<Actor>(); 
-  boolean white; 
-  Player opponent; 
-  int tileDimensions = 0; 
-  ArrayList<Move> attacks = new ArrayList<Move>(); 
+class Player {
+  ArrayList<Actor> actors = new ArrayList<Actor>();
+  boolean white;
+  Player opponent;
+  int tileDimensions = 0;
+
+  ArrayList<Move> attacks = new ArrayList<Move>();
   
-  public Player(boolean white){
-    this.white = white; 
+  public Player(boolean white) {
+    this.white = white;
   }
-  public void setOpponent(Player player){
-    this.opponent = player; 
+
+  public void setOpponent(Player player) {
+    this.opponent = player;
   }
-  
-  public void setTileDimensions(int dimensions){
-    tileDimensions = dimensions; 
+
+  public void setTileDimensions(int dimensions) {
+    tileDimensions = dimensions;
   }
-  
-  // Add actor 
+
+  // Add actor to board
   public void addActor(Actor actor) {
     actor.setColor(white);
     actor.setPlayer(this, opponent);
@@ -77,6 +79,16 @@ public class Player{
     for(int i = 0; i < this.opponent.getActors().size(); i++) {
       Actor actor = this.opponent.getActors().get(i);
       if (actor.name != "King") moves.addAll(actor.getAvailableMoves(board));
+    }
+
+    return moves;
+  }
+
+  public ArrayList<Move> getAllMoves(Board board) {
+    ArrayList<Move> moves = new ArrayList<Move>();
+    for(int i = 0; i < getActors().size(); i++) {
+      Actor actor = getActors().get(i);
+      moves.addAll(actor.getAllMoves(board));
     }
 
     return moves;

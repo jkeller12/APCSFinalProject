@@ -9,10 +9,10 @@ class Pawn extends Actor {
     setPosition(move.x, move.y);
 
     if (move.y == 0 || move.y == 7) {
-      Actor pawn = new Pawn(move.x, move.y, white);
-      pawn.setup();
-      pawn.setTileDimensions(tileDimensions);
-      return pawn;
+      Actor queen = new Queen(move.x, move.y, white);
+      queen.setup();
+      queen.setTileDimensions(tileDimensions);
+      return queen;
     } 
     else return this;
   }

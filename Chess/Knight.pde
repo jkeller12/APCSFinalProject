@@ -1,4 +1,4 @@
-public class Knight extends Actor{
+class Knight extends Actor {
   public Knight(int x, int y, boolean white) {
     super(x, y, white);
     name = "Knight";

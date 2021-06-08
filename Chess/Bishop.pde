@@ -1,10 +1,10 @@
-public class Bishop extends Actor{
-  public Bishop(int x, int y, boolean white){
+class Bishop extends Actor {
+  public Bishop(int x, int y, boolean white) {
     super(x, y, white);
-    name = "Bishop"; 
+    name = "Bishop";
   }
-  // Generate Diagonal moves
-  
+
+  // Generate diagonal moves
   public ArrayList<Move> getAvailableMoves(Board board) {
     ArrayList<Move> moves = new ArrayList<Move>();
     
