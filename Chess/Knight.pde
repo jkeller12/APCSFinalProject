@@ -1,23 +1,35 @@
-public class Knight extends Piece{
-  private PImage Image;
-  public Knight(boolean BoW){
-    super(BoW);
-    PImage Kn;
-    if(BoW == false) Kn = loadImage("WhiteKnight.png");
-    else{
-      Kn = loadImage("BlackKnight.png");
-    }
-    Kn.resize(width/8,height/8);
-    this.Image = Kn;
+public class Knight extends Actor{
+  public Knight(int x, int y, boolean white) {
+    super(x, y, white);
+    name = "Knight";
   }
-  
-  public PImage getImage(){
-    return Image;
-  }
-  public boolean movable(Board board, Cell start, Cell end){
-    if(end.getPiece() != null && end.getPiece().BoW() == this.BoW()) return false; 
-    int x = Math.abs(start.getX() - end.getX());
-    int y = Math.abs(start.getY() - end.getY()); 
-    return x * y == 2; 
+
+  public ArrayList<Move> getAvailableMoves(Board board) {
+    ArrayList<Move> moves = new ArrayList<Move>();
+    
+    // Collecting targetable actors
+    Actor frontRight = board.getActor(posX + 1, posY + direction * 2);
+    Actor frontLeft = board.getActor(posX - 1, posY + direction * 2);
+    Actor backRight = board.getActor(posX + 1, posY - direction * 2);
+    Actor backLeft = board.getActor(posX - 1, posY - direction * 2);
+    
+    Actor rightFront = board.getActor(posX + 2, posY + direction);
+    Actor rightBack = board.getActor(posX + 2, posY - direction);
+    Actor leftFront = board.getActor(posX - 2, posY + direction);
+    Actor leftBack = board.getActor(posX - 2, posY - direction);
+
+    // Adding valid moves
+    if (!isAlly(frontRight)) moves.add(new Move(posX + 1, posY + direction * 2, frontRight));
+    if (!isAlly(frontLeft)) moves.add(new Move(posX - 1, posY + direction * 2, frontLeft));
+    if (!isAlly(backRight)) moves.add(new Move(posX + 1, posY - direction * 2, backRight));
+    if (!isAlly(backLeft)) moves.add(new Move(posX - 1, posY - direction * 2, backLeft));
+    if (!isAlly(rightFront)) moves.add(new Move(posX + 2, posY + direction, rightFront));
+    if (!isAlly(rightBack)) moves.add(new Move(posX + 2, posY - direction, rightBack));
+    if (!isAlly(leftFront)) moves.add(new Move(posX - 2, posY + direction, leftFront));
+    if (!isAlly(leftBack)) moves.add(new Move(posX - 2, posY - direction, leftBack));
+
+    for (int i = 0; i < moves.size(); i++) moves.get(i).source = this;
+
+    return moves;
   }
 }

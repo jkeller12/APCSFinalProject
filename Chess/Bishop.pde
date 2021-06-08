@@ -5,49 +5,71 @@ public class Bishop extends Actor{
   }
   // Generate Diagonal moves
   
-  public ArrayList<Move> getAvailableMoves(Board board){
-    ArrayList<Move> moves = new ArrayList<Move>(); 
+  public ArrayList<Move> getAvailableMoves(Board board) {
+    ArrayList<Move> moves = new ArrayList<Move>();
     
-    int fr = 0; 
-    while(this.posY + this.direction * fr >= 0 && this.posY + this.direction * fr < 8){
-      fr++; 
-      Move move = new Move(this.posX + fr, this.posY + this.direction * fr, null); 
-      Actor target = board.getActor(move.x, move.y); 
+    // Forward Right
+    int fr = 0;
+    while (posY + direction * fr >= 0 && posY + direction * fr <= 7) {
+      fr++;
+      Move move = new Move(posX + fr, posY + direction * fr, null);
+      Actor targetActor = board.getActor(move.x, move.y);
+      if (targetActor == null) moves.add(move);
+      else if (isAlly(targetActor)) break;
+      else {
+        move.target = targetActor;
+        moves.add(move);
+        break;
+      }
     }
+
+    // Backward Right
+    int br = 0;
+    while (posY - direction * br >= 0 && posY - direction * br <= 7) {
+      br++;
+      Move move = new Move(posX + br, posY - direction * br, null);
+      Actor targetActor = board.getActor(move.x, move.y);
+      if (targetActor == null) moves.add(move);
+      else if (isAlly(targetActor)) break;
+      else {
+        move.target = targetActor;
+        moves.add(move);
+        break;
+      }
+    }
+
+    // Forward Left
+    int fl = 0;
+    while (posY + direction * fl >= 0 && posY + direction * fl <= 7) {
+      fl++;
+      Move move = new Move(posX - fl, posY + direction * fl, null);
+      Actor targetActor = board.getActor(move.x, move.y);
+      if (targetActor == null) moves.add(move);
+      else if (isAlly(targetActor)) break;
+      else {
+        move.target = targetActor;
+        moves.add(move);
+        break;
+      }
+    }
+
+    // Backward Left
+    int bl = 0;
+    while (posY - direction * bl >= 0 && posY - direction * bl <= 7) {
+      bl++;
+      Move move = new Move(posX - bl, posY - direction * bl, null);
+      Actor targetActor = board.getActor(move.x, move.y);
+      if (targetActor == null) moves.add(move);
+      else if (isAlly(targetActor)) break;
+      else {
+        move.target = targetActor;
+        moves.add(move);
+        break;
+      }
+    }
+
+    for (int i = 0; i < moves.size(); i++) moves.get(i).source = this;
+    
+    return moves;
   }
-  public boolean movable(Board board, Cell start, Cell end){
-    if(end.getPiece() != null && end.getPiece().BoW() == this.BoW()) return false;
-     int xi = start.getX();
-     int xf = end.getX();
-     int yi = start.getY();
-     int yf = start.getY();
-
-     int dX = abs(xi-xf);
-
-     int dY = abs(yi-yf);
-     if(dX == 0 || dY == 0) return false;
-     if(dX/dY == 1){
-       if(xi < xf){
-         for(int c = xi+1; c < xf; c++){
-           if(yi < yf) for(int r = yi+1; r < yf; r++) if(board.getCell(c, r).getPiece() != null) return false;
-
-           if(yf < yi) for(int r = yf; r < yi; r++) if(board.getCell(c, r).getPiece() != null) return false;
-         }
-       }
-       if(xf < xi){
-         for(int c = xf+1; c < xi; c++){
-           if(yi < yf) for(int r = yi+1; r < yf; r++) if(board.getCell(c, r).getPiece() != null) return false;
-
-           if(yf < yi) for(int r = yf; r < yi; r++) if(board.getCell(c, r).getPiece() != null) return false;
-         }
-       }
-       else return true;
-     }
-     return false;
-  }
-
-  public PImage getImage(){
-    return Image;
-  }
-
 }
