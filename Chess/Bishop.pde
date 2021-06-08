@@ -1,16 +1,20 @@
-public class Bishop extends Piece{
-  private PImage Image;
-  public Bishop(boolean BoW){
-    super(BoW);
-    PImage B;
-    if(BoW == false) B = loadImage("WhiteBishop.png");
-    else{
-      B = loadImage("BlackBishop.png");
-    }
-    B.resize(width/8,height/8);
-    this.Image = B;
+public class Bishop extends Actor{
+  public Bishop(int x, int y, boolean white){
+    super(x, y, white);
+    name = "Bishop"; 
   }
-
+  // Generate Diagonal moves
+  
+  public ArrayList<Move> getAvailableMoves(Board board){
+    ArrayList<Move> moves = new ArrayList<Move>(); 
+    
+    int fr = 0; 
+    while(this.posY + this.direction * fr >= 0 && this.posY + this.direction * fr < 8){
+      fr++; 
+      Move move = new Move(this.posX + fr, this.posY + this.direction * fr, null); 
+      Actor target = board.getActor(move.x, move.y); 
+    }
+  }
   public boolean movable(Board board, Cell start, Cell end){
     if(end.getPiece() != null && end.getPiece().BoW() == this.BoW()) return false;
      int xi = start.getX();

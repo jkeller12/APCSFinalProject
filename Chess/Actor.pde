@@ -100,4 +100,50 @@ public class Actor{
     return moves; 
   }
   
+  public Actor moveTo(Move move){
+    previousMoves.add(move); 
+    setPosition(move.x, move.y); 
+    return this; 
+  }
+  public void setPosition(int x, int y){
+    this.posX = x; 
+    this.posY = y; 
+  }
+  
+  // Function to draw in actor
+  
+  public void draw(boolean selected){
+   int x = this.posX * titleDimensions; 
+   int y = this.posY * titleDimensions; 
+   
+   if(selected){
+     fill(200, 200, 0, 100);
+     rect(x, y, titleDimensions, titleDimensions); 
+   }
+   imageMode(CENTER); 
+   image(img, x + titleDimensions / 2, y + titleDimensions / 2, titleDimensions, titleDimensions); 
+  }
+  
+  // Return if King is in danger (myb move to king class) 
+  
+  public boolean isInDanger(Board board){
+    return false; 
+  }
+  
+  public void checkForDanger(Board board){} // Used by kings 
+  
+  public boolean checkForCheckSolution(Board board, Move move){
+    boolean result =false; 
+    int x0 = this.posX; 
+    int y0 = this.posY; 
+    
+    this.posX = move.x; 
+    this.posY = move.y; 
+    ArrayList<Move> moves = player.generateAttackedfields(board); 
+    result = player.checkSolution(moves); 
+    this.posX = x0; 
+    this.posY = y0; 
+    return !result; 
+  }
+  // ToDo: check if actor takes attacker
 }
