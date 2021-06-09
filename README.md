@@ -68,5 +68,5 @@ Development Log:
 
 06/09/21
 -Fixed endgame scenario/king movement error and endgame projection
-
+-Castling still doesn't work, en-passant needs installing, and king next to king move error
 ```
