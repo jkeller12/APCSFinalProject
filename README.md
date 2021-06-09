@@ -4,11 +4,14 @@ Group Number: 19
 Group Members: Jonah Keller
 Prototype Link: https://tinyurl.com/4kpv9dkk
 
+Compile Instructions: Load Chess.pde file in Processing and click play.
+
 Brief Project Description: I will be making a game of Chess. I will hopefully have a timer, orientation options, and all the regular rules of chess.
 
-Expanded Descriptions:
-Critical Features: Chess board with movable pieces that follow the rules of chess and can take user input from the mouse.
-Nice to have: timer, "take-back" move option, and orientation options.
+
+
+
+
 
 Outline:
 chess class

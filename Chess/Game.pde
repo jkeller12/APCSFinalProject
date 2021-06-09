@@ -1,5 +1,14 @@
-public class Game{
+enum GameState {
+  RUNNING,
+  WHITE_WIN, 
+  BLACK_WIN,
+  DRAW
+}
+
+class Game {
   public Board board = new Board();
+
+  GameState gameState = GameState.RUNNING;
 
   // Game constructor
   public Game() {
@@ -7,6 +16,7 @@ public class Game{
 
     // Setting up board
     board.setup(800);
+    board.setGame(this);
 
     // Setting opponents
     board.whitePlayer.setOpponent(board.blackPlayer);
@@ -22,6 +32,10 @@ public class Game{
     board.setupActors();
   }
   
+  public void setGameState(GameState state) {
+    this.gameState = state;
+  }
+
   // Setting up board
   void setupTeam (Player player) {
     boolean white = player.white;
@@ -41,10 +55,10 @@ public class Game{
     player.addActor(new Bishop(5, white ? 7 : 0, white));
     
     // Adding king
-    player.addActor(new King(3, white ? 7 : 0, white));
+    player.addActor(new King(4, white ? 7 : 0, white));
     
     // Adding queen
-    player.addActor(new Queen(4, white ? 7 : 0, white));
+    player.addActor(new Queen(3, white ? 7 : 0, white));
   }
 
   // Drawing game
@@ -52,10 +66,23 @@ public class Game{
     int hoveredX = (int)(((float)mouseX / 800.0) * 8);
     int hoveredY = (int)(((float)mouseY / 800.0) * 8);
     board.draw(hoveredX, hoveredY);
+    if (gameState == GameState.DRAW) drawText("Draw, nobody wins");
+    else if (gameState == GameState.WHITE_WIN) drawText("White wins");
+    else if (gameState == GameState.BLACK_WIN) drawText("Black wins");
+  }
+
+  public void drawText(String text) {
+    fill(0, 0, 0, 120);
+    rect(0, 0, 800, 800);
+    textSize(48);
+    fill(255);
+    textAlign(CENTER, CENTER);
+    text(text, 0, 0, 800, 800);
   }
 
   // Forwarding click events
   public void mouseClicked() {
-    board.mouseClicked();
+    if (gameState == GameState.RUNNING) board.mouseClicked();
+    
   }
 }
