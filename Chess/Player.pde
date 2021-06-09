@@ -40,6 +40,7 @@ class Player {
 
   // Move actor
   public void moveActor(Actor actor, Move move) {
+    if (move.effect != null) move.effect.source.moveTo(move.effect);
     int index = actors.indexOf(actor);
     Actor newActor = actor.moveTo(move);
     if (newActor != actor) actors.set(index, newActor);
@@ -48,7 +49,7 @@ class Player {
   // Remove actor
   public void removeActor(Actor actor) {
     int index = actors.indexOf(actor);
-    if(index >= 0 && index < actors.size()) actors.remove(index); 
+    if (index >= 0 && index < actors.size()) actors.remove(index);
   }
 
   // Get all actors of a player
@@ -79,6 +80,16 @@ class Player {
     for(int i = 0; i < this.opponent.getActors().size(); i++) {
       Actor actor = this.opponent.getActors().get(i);
       if (actor.name != "King") moves.addAll(actor.getAvailableMoves(board));
+      else {
+        moves.add(new Move(actor.posX - 1, actor.posY - 1, this.getActor(actor.posX - 1, actor.posY - 1)));
+        moves.add(new Move(actor.posX, actor.posY - 1, this.getActor(actor.posX, actor.posY - 1)));
+        moves.add(new Move(actor.posX + 1, actor.posY - 1, this.getActor(actor.posX + 1, actor.posY - 1)));
+        moves.add(new Move(actor.posX - 1, actor.posY, this.getActor(actor.posX - 1, actor.posY)));
+        moves.add(new Move(actor.posX + 1, actor.posY, this.getActor(actor.posX + 1, actor.posY)));
+        moves.add(new Move(actor.posX - 1, actor.posY + 1, this.getActor(actor.posX - 1, actor.posY + 1)));
+        moves.add(new Move(actor.posX, actor.posY + 1, this.getActor(actor.posX, actor.posY + 1)));
+        moves.add(new Move(actor.posX + 1, actor.posY + 1, this.getActor(actor.posX + 1, actor.posY + 1)));
+      }
     }
 
     return moves;
