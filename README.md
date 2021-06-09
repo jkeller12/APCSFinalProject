@@ -62,4 +62,11 @@ Development Log:
 -Cleared up castling methods, incheck methods
 -Board/game graphics implemented.
 
+06/08/21
+-Piece movement graphics implmeneted.
+-Fixing issue with endgame scenario and endgame graphic projection
+
+06/09/21
+-Fixed endgame scenario/king movement error and endgame projection
+
 ```
