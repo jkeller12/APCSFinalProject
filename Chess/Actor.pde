@@ -160,6 +160,7 @@ class Actor {
   }
 
   // Return if actor is in danger (only used by kings)
+  
   public boolean isInDanger(Board board) {
     return false;
   }
